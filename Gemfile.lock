@@ -95,7 +95,6 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.10.0)
-    excon (0.78.1)
     execjs (2.7.0)
     ffi (1.13.1)
     ffi-compiler (1.0.1)
@@ -253,7 +252,6 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
-  excon
   figaro
   http
   jbuilder (~> 2.7)
