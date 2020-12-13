@@ -1,21 +1,26 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = fetch_articles_testing
+    @articles = fetch_top_headlines(params[:query])
+    # @articles = fetch_articles_testing
   end
+
+  # def search
+  #   render :index
+  # end
   
   def new; end
 
   def create; end
   
   def destroy; end
-  
-  def show; end
 
   private
 
-  def fetch_articles
-    response = HTTP.headers(:'X-Api-Key' => "#{ENV["NEWS_API_KEY"]}").get("https://newsapi.org/v2/top-headlines?country=us")
-    # binding.pry
+  def fetch_top_headlines(query)
+    query != '' ? user_query = "q=#{query}" : user_query = 'country=us'
+
+    response = HTTP.headers(:'X-Api-Key' => "#{ENV["NEWS_API_KEY"]}").get("https://newsapi.org/v2/top-headlines?#{user_query}")
+    binding.pry
     return nil if response.status != 200
     JSON.parse(response)['articles']
   end
