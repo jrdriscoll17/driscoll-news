@@ -1,0 +1,5 @@
+<%= form_with(url: articles_path, method: 'get', local: true) do |form| %>
+  <%= form.label :query, 'Search by keyword' %>
+  <%= form.text_field :query, placeholder: 'Eg. Football'%>
+  <%= form.button 'Search'%>
+<% end %>
