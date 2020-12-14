@@ -3,10 +3,10 @@ class ArticlesController < ApplicationController
     # @articles = fetch_top_headlines(params[:query])
     @articles = fetch_articles_testing
   end
-  
-  def new; end
 
-  def create; end
+  def create
+    @article = Article.new(params[:article_params])
+  end
   
   def destroy; end
 
@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
     else
       response = HTTP.headers(:'X-Api-Key' => "#{ENV["NEWS_API_KEY"]}").get("https://newsapi.org/v2/top-headlines?q=#{query}")
     end
-    # binding.pry
+
     return nil if response.status != 200
     JSON.parse(response)['articles']
   end

@@ -8,6 +8,8 @@
       <br><br>
       <p><%= article['description'] %></p>
       <div class="publisher"><%= article['source']['name'] %></div>
+      <%= button_to '+', new_article_path, params: article_params(article) %>
     </li>
+    <hr>
   <% end %>
 </ul>
