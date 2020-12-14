@@ -13,10 +13,12 @@ class ArticlesController < ApplicationController
   private
 
   def fetch_top_headlines(query)
-    query != '' ? user_query = "q=#{query}" : user_query = 'country=us'
-
-    response = HTTP.headers(:'X-Api-Key' => "#{ENV["NEWS_API_KEY"]}").get("https://newsapi.org/v2/top-headlines?#{user_query}")
-    
+    if query == '' || query == nil
+      response = HTTP.headers(:'X-Api-Key' => "#{ENV["NEWS_API_KEY"]}").get("https://newsapi.org/v2/top-headlines?country=us")
+    else
+      response = HTTP.headers(:'X-Api-Key' => "#{ENV["NEWS_API_KEY"]}").get("https://newsapi.org/v2/top-headlines?q=#{query}")
+    end
+    # binding.pry
     return nil if response.status != 200
     JSON.parse(response)['articles']
   end
